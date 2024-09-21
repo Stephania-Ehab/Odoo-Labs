@@ -1,0 +1,74 @@
+<odoo>
+    <record id="ticket_tree_view" model="ir.ui.view">
+        <field name="name">ticket.tree.view</field>
+        <field name="model">td.ticket</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="number"/>
+                <field name="tag"/>
+                <field name="file"/>
+                <field name="assign_to"/>
+                <field name="description"/>
+                <field name="state"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="ticket_form_view" model="ir.ui.view">
+        <field name="name">ticket.form.view</field>
+        <field name="model">td.ticket</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_new"
+                            type="object"
+                            class="btn-primary"
+                            string="New"
+                            invisible="state != 'done'"/>
+                    <button name="action_doing"
+                            type="object"
+                            class="btn-info"
+                            string="Doing"
+                            invisible="state != 'new'"/>
+                    <button name="action_done"
+                            type="object"
+                            class="btn-success"
+                            string="Done"
+                            invisible="state != 'doing'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="number"/>
+                            <field name="file"/>
+                            <field name="assign_to"/>
+                            <field name="description"/>
+                            <field name="state"/>
+
+
+                        </group>
+<!--                        <group>-->
+<!--                            <field name="published_date"/>-->
+<!--                            <field name="is_published"/>-->
+<!--                        </group>-->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="todo_ticket_action" model="ir.actions.act_window">
+        <field name="name">Todo List</field>
+        <field name="res_model">td.ticket</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menuitem_todo_ticket"
+              name="All Tickets"
+              parent="menu_root_ticket"
+              action="todo_ticket_action"/>
+</odoo>
