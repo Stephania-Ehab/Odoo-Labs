@@ -1,0 +1,34 @@
+<odoo>
+    <menuitem id="menu_hms"
+              name="Hospital"/>
+
+<!--    <menuitem id="menu_hms"-->
+<!--              name="Patient"/>-->
+<!--    -->
+<!--    <menuitem id="menu_hms"-->
+<!--              name="Doctor"/>-->
+<!--    -->
+<!--    <menuitem id="menu_hms"-->
+<!--              name="Department"/>-->
+
+
+
+
+    <menuitem id="menu_root_patient"
+              name="Patients"
+              parent="menu_hms"/>
+
+    <menuitem id="menu_root_doctor"
+              name="Doctors"
+              parent="menu_hms"/>
+
+    <menuitem id="menu_root_department"
+              name="Departments"
+              parent="menu_hms"/>
+
+    <menuitem id="menu_root_patient_log"
+              name="PatientsLogs"
+              parent="menu_hms"/>
+
+
+</odoo>
