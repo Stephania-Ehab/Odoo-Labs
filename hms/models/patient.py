@@ -1,5 +1,8 @@
 from odoo import models, fields, api
-from odoo.exceptions import UserError
+# from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
+import re
+
 
 
 
@@ -27,12 +30,25 @@ class Patient(models.Model):
     pcr = fields.Boolean()
     image = fields.Binary()
     address = fields.Text()
+    email = fields.Char(string='Email')
     age = fields.Integer(compute='_compute_age')
 
     department_id = fields.Many2one('hms.department', string='Department')
     department_capacity = fields.Integer(string='Department Capacity', related='department_id.capacity', readonly=True)
-    doctor_id = fields.Many2one('hms.doctor', string='Doctor')
+    # doctor_id = fields.Many2one('hms.doctor', string='Doctor')
+    doctor_ids=fields.Many2many('hms.doctor','hms_patient_doctor', 'doctor_id','patient_id')
     log_history = fields.One2many('hms.patient.log', 'patient_id')
+
+
+    @api.onchange('email')
+    def _onchange_valid_email(self):
+        if self.email:
+            match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', self.email)
+            email = self.env['hms.patient'].search([('email', '=', self.email)])
+            if not match:
+                raise ValidationError('Not a valid E-mail ID')
+            if email:
+                raise ValidationError('This email used before')
 
     @api.depends('birth_date')
     def _compute_age(self):

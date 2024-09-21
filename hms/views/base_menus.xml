@@ -26,9 +26,9 @@
               name="Departments"
               parent="menu_hms"/>
 
-    <menuitem id="menu_root_patient_log"
-              name="PatientsLogs"
-              parent="menu_hms"/>
+<!--    <menuitem id="menu_root_patient_log"-->
+<!--              name="PatientsLogs"-->
+<!--              parent="menu_hms"/>-->
 
 
 </odoo>

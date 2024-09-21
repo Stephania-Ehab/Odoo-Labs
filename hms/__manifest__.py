@@ -8,12 +8,14 @@
     "depends": ['base'],
     "application": True,
     "data": [
+        'security/group.xml',
         'security/ir.model.access.csv',
         'views/base_menus.xml',
         'views/patient_view.xml',
         'views/doctor_view.xml',
         'views/department_view.xml',
         'wizard/add_history_wizard_view.xml',
+        'report/patient_report.xml',
 
     ]
 }
